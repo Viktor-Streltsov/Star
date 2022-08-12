@@ -13,3 +13,24 @@
     text-align: center;
     text-shadow: var(--text-shadow-blue);
 }
+
+@media screen and (max-width: 600px) {
+    .img {
+        width: 455px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .img {
+        width: 355px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .img {
+        width: 255px;
+    }
+}
+@media screen and (max-width: 300px) {
+    .img {
+        width: 155px;
+    }
+}

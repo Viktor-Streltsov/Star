@@ -20,3 +20,36 @@
     border-radius: var(--border-radius-medium);
     box-shadow: var(--box-shadow-white);
 }
+
+@media screen and (max-width: 600px) {
+    .text {
+        width: 455px;
+    }
+    .video{
+        width: 455px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .text {
+        width: 355px;
+    }
+    .video{
+        width: 355px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .text {
+        width: 255px;
+    }
+    .video{
+        width: 255px;
+    }
+}
+@media screen and (max-width: 300px) {
+    .text {
+        width: 155px;
+    }
+    .video{
+        width: 155px;
+    }
+}
