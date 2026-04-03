@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import { withErrorApi } from '@hoc-helpers/withErrorApi';
@@ -10,8 +10,6 @@ import { AIP_PEOPLE } from '@constans/api';
 import { useQueryParams } from '@hooks/useQueryParams';
 
 
-import style from'./PeoplePage.module.css';
-
 const PeoplePage = ({ setErrorApi }) => {
     const [people, setPeople] = useState(null);
     const [prevPage, setPrevPage] = useState(null);
@@ -21,7 +19,7 @@ const PeoplePage = ({ setErrorApi }) => {
     const query = useQueryParams();
     const queryPage = query.get('page');
 
-    const getResource = async (url) => {
+    const getResource = useCallback(async (url) => {
         const res = await getApiResource(url);
 
         if(res) {
@@ -43,12 +41,12 @@ const PeoplePage = ({ setErrorApi }) => {
         }else {
             setErrorApi(true);
         }
-    }
+    }, [setErrorApi]);
 
 
     useEffect(() => {
-        getResource(AIP_PEOPLE+queryPage);
-    },[]);
+        getResource(AIP_PEOPLE + (queryPage || 1));
+    }, [getResource, queryPage]);
 
    return (
        <>

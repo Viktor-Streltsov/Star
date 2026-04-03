@@ -1,20 +1,14 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import icon from './img/bookmark.svg';
 
 import styles from './Favorite.module.css';
 
 
 const Favorite = () => {
-    const [count, setCount] = useState();
     const storeDate = useSelector(state => state.favoriteReducer);
-
-    useEffect(() => {
-        const length = Object.keys(storeDate).length;
-        length.toString().length > 2 ? setCount('...') : setCount(length);
-        setCount(length);
-    });
+    const favoritesCount = Object.keys(storeDate).length;
+    const count = favoritesCount.toString().length > 2 ? '...' : favoritesCount;
 
    return (
        <div className={styles.container}>

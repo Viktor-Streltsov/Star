@@ -1,7 +1,5 @@
 import ChooseSide from '@components/HomePage/ChooseSide/ChooseSide';
 
-import styles from './HomePage.module.css';
-
 
 const HomePage = () => {
    return (

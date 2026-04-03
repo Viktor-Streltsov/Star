@@ -1,4 +1,4 @@
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { withErrorApi } from '@hoc-helpers/withErrorApi';
 import { useSelector } from 'react-redux';
 
@@ -20,7 +20,7 @@ const PersonFilms = React.lazy(() => import('@components/PesonPage/PersonFilms')
 
 
 const PersonPage = ({ setErrorApi }) => {
-    const [id] = useParams().id;
+    const { id } = useParams();
     const [personId, setPersonId] = useState(null);
     const [personInfo, setPersonInfo] = useState(null);
     const [personName, setPersonName] = useState(null);
@@ -31,10 +31,20 @@ const PersonPage = ({ setErrorApi }) => {
     const storeDate = useSelector(state => state.favoriteReducer);
 
     useEffect(() => {
+        if (!id) {
+            return;
+        }
+
+        setPersonFavorite(Boolean(storeDate[id]));
+    }, [id, storeDate]);
+
+    useEffect(() => {
+        if (!id) {
+            return;
+        }
+
         (async () => {
             const res = await getApiResource(`${AIP_PERSON}/${id}/`);
-
-            storeDate[id] ? setPersonFavorite(true) : setPersonFavorite(false);
 
             setPersonId(id);
 
@@ -59,7 +69,7 @@ const PersonPage = ({ setErrorApi }) => {
                 setErrorApi(true);
             }
         })();
-    }, []);
+    }, [id, setErrorApi]);
 
    return (
        <>

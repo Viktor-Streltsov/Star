@@ -6,8 +6,10 @@ import { useEffect, useRef } from 'react';
 const Uivideo = ({ src, classes, playbackrate=1.0, }) => {
     const videoRef = useRef(null);
     useEffect(() => {
-        videoRef.current.playbackrate = playbackrate;
-    }, []);
+        if (videoRef.current) {
+            videoRef.current.playbackRate = playbackrate;
+        }
+    }, [playbackrate]);
 
    return (
        <video loop autoPlay muted ref={videoRef} className={cn(styles.video, classes)}>

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
@@ -13,16 +12,21 @@ const UiLoading = ({
     isShadow=true,
     classes
 }) => {
-    const [loaderIcon, setLoaderIcon] = useState(null);
+    let loaderIcon = loaderBlack;
 
-    useEffect(() => {
-        switch (theme) {
-            case 'black':setLoaderIcon(loaderBlack); break;
-            case 'blue':setLoaderIcon(loaderBlue); break;
-            case 'white':setLoaderIcon(loaderWhite); break;
-            default: setLoaderIcon(loaderBlack);
-        }
-    }, [])
+    switch (theme) {
+        case 'black':
+            loaderIcon = loaderBlack;
+            break;
+        case 'blue':
+            loaderIcon = loaderBlue;
+            break;
+        case 'white':
+            loaderIcon = loaderWhite;
+            break;
+        default:
+            loaderIcon = loaderBlack;
+    }
 
    return (
        <img

@@ -12,14 +12,14 @@ const PersonLinkBack = () => {
     }
    
     return (
-       <a
-            href='#'
+       <button
+            type="button"
             onClick={handleGoBack}
             className={styles.link}
        >
             <img className={styles.link__img} src={iconBack} alt='Go Back' />
             <span>Go back</span>
-       </a>
+       </button>
    )
 }
 

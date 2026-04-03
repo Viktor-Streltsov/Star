@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { debounce } from 'lodash';
 
 import { withErrorApi } from '@hoc-helpers/withErrorApi';
@@ -16,7 +16,7 @@ const SearchPage = ({ setErrorApi }) => {
     const [inputSearchValue, setInputSearchValue] = useState('');
     const [people, setPeople] = useState([]);
 
-    const getResponse = async param => {
+    const getResponse = useCallback(async (param) => {
         const res = await getApiResource(AIP_SEARCH+param);
 
         if (res) {
@@ -34,16 +34,21 @@ const SearchPage = ({ setErrorApi }) => {
         }else {
             setErrorApi(true);
         }
-    }
+    }, [setErrorApi]);
 
     useEffect(() => {
         getResponse('');
-    },[]);
+    }, [getResponse]);
 
-    const debounceGetRespouns = useCallback(
-        debounce(value => getResponse(value), 300),
-        []
-    );
+    const debounceGetRespouns = useMemo(() => {
+        return debounce(value => getResponse(value), 300);
+    }, [getResponse]);
+
+    useEffect(() => {
+        return () => {
+            debounceGetRespouns.cancel();
+        };
+    }, [debounceGetRespouns]);
 
     const handleInputChange = (value) => {
         setInputSearchValue(value);

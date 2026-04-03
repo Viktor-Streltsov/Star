@@ -9,13 +9,28 @@ const PersonFilms = ({ personFilms }) => {
     const [ filmsName, setFilmsName ] = useState([]);
 
     useEffect(() => {
-        (async () => {
+        let isMounted = true;
+
+        const getFilms = async () => {
+            if (!personFilms?.length) {
+                setFilmsName([]);
+                return;
+            }
+
             const filmsHTTS = personFilms.map(url => changeHTTP(url));
             const response = await makeConcurerentRequest(filmsHTTS);
 
-            setFilmsName(response);
-        })();
-    }, []);
+            if (isMounted) {
+                setFilmsName(response);
+            }
+        };
+
+        getFilms();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [personFilms]);
 
     return (
         <div className={styles.wrapper}>
