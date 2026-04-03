@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import styles from './SearchPageInfo.module.css';
+import imgClone from './img/clone.jpg';
 
 const SearchPageInfo = ({ people }) => (
     <>
@@ -10,7 +11,7 @@ const SearchPageInfo = ({ people }) => (
                     {people.map(({ id, name, img }) =>
                         <li className={styles.list__item} key={id}>
                             <Link to={`/people/${id}`}>
-                                <img className={styles.person__photo} src={img} alt={name} />
+                                <img className={styles.person__photo} src={imgClone} alt={name} />
                                 <p className={styles.person__name}>{name}</p>
                             </Link>
                         </li>

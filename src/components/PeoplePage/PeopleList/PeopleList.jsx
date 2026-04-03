@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import imgClone from './img/clone.jpg'
 
 import styles from './PeopleList.module.css';
 
@@ -9,7 +10,7 @@ const PeopleList = ({people}) => {
         {people.map(({id, name, img}) => 
             <li className={styles.list__item} key={id}>
                 <Link to={`/people/${id}`}>
-                    <img className={styles.list__pgoto} src={img} alt={name} />
+                    <img className={styles.list__pgoto} src={imgClone} alt={name} />
                     <p>{name}</p>
                 </Link>
             </li>

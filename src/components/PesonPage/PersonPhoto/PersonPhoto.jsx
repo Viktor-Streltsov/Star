@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import { setPersonToFavorite, removePersonFromFavorite } from '@store/actions';
-
+import imgClone from './img/clone.jpg'
 import iconFavorite from './img/favorite.svg';
 import iconFavoriteFill from './img/favorite-fill.svg';
 
@@ -36,7 +36,7 @@ const PersonPhoto = ({
    return (
        <>
             <div className={styles.container}>
-                <img className={styles.photo} src={personPhoto} alt={personName} />
+                <img className={styles.photo} src={imgClone} alt={personName} />
 
                 <img
                     src={personFavorite ? iconFavoriteFill : iconFavorite}
